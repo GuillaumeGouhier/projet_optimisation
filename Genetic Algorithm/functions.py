@@ -20,7 +20,7 @@ def mutation(proba, solution):
     if(random.random() <= proba):
         solution.mutate()
 
-def parentCouples():
+def parentCouples(population):
 
     random.shuffle(population)
 
@@ -28,11 +28,11 @@ def parentCouples():
 
     return couples
 
-def newPop(couples):
+def addChilds(couples):
 
     return list(map(lambda x: breed(x[0], x[1]), couples))
 
-def nextPop(population):
+def select_survivors(population):
     return list(filter(lambda x: x.isPossible(), population))
 
 
@@ -40,3 +40,7 @@ def bestscore(population):
     return max(list(map(lambda x: x.getScore(), population)))
 
 # TODO: going from genX to genX+1
+def nextGeneration(population):
+    survivors = select_survivors(population)
+    survivors.add(addChilds(parentCouples(population)))
+    return survivors
