@@ -3,7 +3,7 @@ class Solution(object):
 
     def __init__(self, arg):
         super(Solution, self).__init__()
-        self.arg = arg
+        self.genes = generateGenes()
 
 ## TODO: Check If Solution Is Viable
     def isPossible(self):
