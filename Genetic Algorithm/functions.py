@@ -20,7 +20,12 @@ def mutation(proba, solution):
 
 def parentCouples():
 
-    couples = random.shuffle()
+    random.shuffle(population)
+
+    couples = [(population[i], population[i+1]) for i in range(0, len(population), 2)]
+
+    return couples
+
 
 def nextPop(population):
     return list(filter(lambda x: x.isPossible(), population))
