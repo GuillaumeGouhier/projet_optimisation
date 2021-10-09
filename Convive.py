@@ -21,3 +21,6 @@ class Convive:
             poids = poids + " + " + self.nonConnu[i]
         poids = poids + " <= " + str(len(self.nonConnu))
         return poids
+
+    def getLenNonConnu(self):
+        return int(len(self.nonConnu))
