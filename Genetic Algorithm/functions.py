@@ -8,10 +8,11 @@ def initPop():
 
     return population
 
+## TODO: Support for multiple genetic ( random etc)
 def breed(parent1, parent2):
 
-    child1 = Solution().setGenes([parent1.getGenes()[:150]] + parent2.getGenes()[150:])
-    child2 = Solution().setGenes([parent2.getGenes()[:150]] + parent1.getGenes()[150:])
+    child1 = Solution([parent1.getGenes()[:150]] + parent2.getGenes()[150:])
+    child2 = Solution([parent2.getGenes()[:150]] + parent1.getGenes()[150:])
 
 def mutation(proba, solution):
     if(random.random() <= proba):
