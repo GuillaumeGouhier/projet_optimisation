@@ -34,3 +34,9 @@ def newPop(couples):
 
 def nextPop(population):
     return list(filter(lambda x: x.isPossible(), population))
+
+
+def bestscore(population):
+    return max(list(map(lambda x: x.getScore(), population)))
+
+# TODO: going from genX to genX+1
