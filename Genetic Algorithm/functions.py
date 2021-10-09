@@ -16,9 +16,8 @@ def breed(parent1, parent2):
 
     return child1, child2
 
-def mutation(proba, solution):
-    if(random.random() <= proba):
-        solution.mutate()
+def mutation(proba, population):
+    return list(map(lambda x: x.mutate(proba), population))
 
 def parentCouples(population):
 

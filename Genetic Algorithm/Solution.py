@@ -8,3 +8,6 @@ class Solution(object):
 ## TODO: Check If Solution Is Viable
     def isPossible(self):
         return True
+
+    def mutate(self, proba):
+        self.genes = list(map(lambda x : 1-x if random.random() <= proba else x, self.genes ))
