@@ -8,3 +8,6 @@ class Solution(object):
 ## TODO: Check If Solution Is Viable
     def isPossible(self):
         return True
+
+    def setGenes(self, genes):
+        self.genes = genes
