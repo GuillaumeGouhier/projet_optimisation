@@ -79,6 +79,8 @@ if __name__ == '__main__':
 ##Critère basé sur le nombre de relations pour tenter de maximiser le score. Mais pas le score directement
 
 def recursiveGlouton(liste_candidate, liste_finale):
+    print("\n Liste candidate: ", liste_candidate)
+    print("\n Liste finale: ", liste_finale)
     # Compter nb personnes connues
     max_so_far = 0
     next_candidate = -1
