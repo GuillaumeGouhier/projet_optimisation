@@ -14,6 +14,8 @@ def breed(parent1, parent2):
     child1 = Solution([parent1.getGenes()[:150]] + parent2.getGenes()[150:])
     child2 = Solution([parent2.getGenes()[:150]] + parent1.getGenes()[150:])
 
+    return child1, child2
+
 def mutation(proba, solution):
     if(random.random() <= proba):
         solution.mutate()
@@ -26,6 +28,9 @@ def parentCouples():
 
     return couples
 
+def newPop(couples):
+
+    return list(map(lambda x: breed(x[0], x[1]), couples))
 
 def nextPop(population):
     return list(filter(lambda x: x.isPossible(), population))
