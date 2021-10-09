@@ -17,3 +17,10 @@ def breed(parent1, parent2):
 def mutation(proba, solution):
     if(random.random() <= proba):
         solution.mutate()
+
+def parentCouples():
+
+    couples = random.shuffle()
+
+def nextPop(population):
+    return list(filter(lambda x: x.isPossible(), population))
