@@ -4,12 +4,7 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import sys
 from Convive import Convive
-from Glouton import Glouton
 
-#def filter_nbConnaissance(file):
-#    for line in file:
-#        if valeur_aFiltré in line:
-#            yield line
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
@@ -21,14 +16,13 @@ if __name__ == '__main__':
     if len(sys.argv) > 2:
         source_file = open(sys.argv[1], "r")
         destination_file = open(sys.argv[2], "w")
+
         source_data = source_file.readline()
         source_data = source_data.split()
 
-        #print(source_data)
+        print(source_data)
         binaries_list = []
         convive_list = []
-        glouton_list = [] #Récupère tous les
-        result_choix = Glouton(999,999) # Pour récupérer le convive avec le plus de connaissance
         destination_file.write("Maximize" + '\n')
         z_max = "z: "
 
@@ -38,16 +32,15 @@ if __name__ == '__main__':
             z_max = z_max + coeff_i[1] + " x" + coeff_i[0] + " + "
 
             binaries_list.append("x" + coeff_i[0])
-            #print(Convive("x"+ coeff_i[0]).getId())
             convive_list.append(Convive("x" + coeff_i[0]))
-        #print(convive_list)
+        print(binaries_list)
 
         for i in range(len(convive_list)):
             convive_list[i].setlisteNonConnu(binaries_list)
-        #print(binaries_list)
+        print(binaries_list)
 
         z_max = z_max[:-2]
-        #print(z_max)
+        print(z_max)
 
         destination_file.write(z_max + '\n')
         destination_file.write("Subject To" + '\n')
@@ -56,20 +49,16 @@ if __name__ == '__main__':
 
             lien_i_j[0] = "x" + lien_i_j[0]
             lien_i_j[1] = "x" + lien_i_j[1]
-
-           # print(lien_i_j[0]+", "+lien_i_j[1])
             for j in range(len(convive_list)):
                 if lien_i_j[0] == convive_list[j].getId():
                     convive_list[j].removeFromList(lien_i_j[1])
                 if lien_i_j[1] == convive_list[j].getId():
                     convive_list[j].removeFromList(lien_i_j[0])
 
-        #print(convive_list[0].constructPoids())
+        print(convive_list[0].constructPoids())
 
         for i in range(len(convive_list)):
             destination_file.write(convive_list[i].constructPoids() + '\n')
-            glouton_list.append(Glouton(convive_list[i].getId(), convive_list[i].getLenNonConnu()))
-
 
         destination_file.write("binaries \n")
 
@@ -80,12 +69,43 @@ if __name__ == '__main__':
         destination_file.write("End")
         source_file.close()
         destination_file.close()
-        for i in range(len(glouton_list)): #
-            result_choix = glouton_list[i].critere_choix(glouton_list[i].getNbConnaissance(), glouton_list[i].getId(), result_choix.getId(), result_choix.getNbConnaissance())
-        print(result_choix.id)
-        print(result_choix.nb_connaissance)
     else:
         print("Utilisation : python main.py source.txt destination.lb")
+
+
+#liste_finale = liste d'ID
+#liste_candidate = liste de Convives
+
+##Critère basé sur le nombre de relations pour tenter de maximiser le score. Mais pas le score directement
+
+def recursiveGlouton(liste_candidate, liste_finale):
+    # Compter nb personnes connues
+    max_so_far = 0
+    next_candidate = -1
+    #Future liste candidate
+    tmp_liste = []
+    #Permet de savoir si tous se connaissent
+    checkLen = ()
+
+    for item in liste_candidate:
+
+        tmp = list(filter(lambda x: x.getId() in item.getListeConnu(), liste_candidate))
+        checkLen.add(len(tmp))
+#Algo pour garder le meilleur candidat ( Nb de relations connues)
+        if max_so_far < len(tmp):
+            tmp_liste = tmp
+            max_so_far = len(tmp)
+            next_candidate = item.getId()
+
+#Renvoie la liste d'ID des Convives
+    if(len(checkLen) == 1):
+        return liste_finale
+
+
+    liste_finale.add(next_candidate)
+    liste_candidate = tmp_liste
+
+    recursiveGlouton(liste_candidate, liste_finale)
 
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

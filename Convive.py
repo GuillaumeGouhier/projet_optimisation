@@ -7,20 +7,23 @@ class Convive:
     def getId(self):
         return self.id
 
-    def setlisteNonConnu(self, liste):  #Initialise la liste des convives que le convive ne connait pas
-        self.nonConnu = liste[:]
-        self.nonConnu.remove(self.id)
+    def setlisteConnu(self, liste):  #Initialise la liste des convives que le convive ne connait pas
+        self.connu = liste[:]
+        self.connu.remove(self.id)
+
+    def getListeConnu(self):
+        return self.connu
 
     def removeFromList(self, id):   #Retire les convives connus de cette liste
-        self.nonConnu.remove(id)
+        self.connu.remove(id)
 
 
     def constructPoids(self):
-        poids = "poids" + self.id + ": " + str(len(self.nonConnu)) + self.id
-        for i in range(len(self.nonConnu)):
-            poids = poids + " + " + self.nonConnu[i]
-        poids = poids + " <= " + str(len(self.nonConnu))
+        poids = "poids" + self.id + ": " + str(len(self.connu)) + self.id
+        for i in range(len(self.connu)):
+            poids = poids + " + " + self.connu[i]
+        poids = poids + " <= " + str(len(self.connu))
         return poids
 
-    def getLenNonConnu(self):
-        return int(len(self.nonConnu))
+    def getLenConnu(self):
+        return int(len(self.connu))
