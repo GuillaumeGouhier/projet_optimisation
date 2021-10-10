@@ -6,8 +6,8 @@ class Solution(object):
         self.genes = genes
 
 ## TODO: Check If Solution Is Viable
-    def isPossible(self):
-        return True
+    def updatePossible(self):
+        self.isPossible = False
 
     def mutate(self, proba):
         self.genes = list(map(lambda x : 1-x if random.random() <= proba else x, self.genes ))
@@ -19,7 +19,10 @@ class Solution(object):
         # Map invite to score
         scores = list(map(lambda x: (len([j for j in invites_candidate if j not in data[x].getListeConnu()]), x), invites_candidate).sort(reverse=True)
         # Remove if too problematic
-        while !self.isPossible():
+        i = 0
+        while self.isPossible == False:
             self.genes[invites_candidate[scores[i][1]]] = 0
+            i++
+            #Update Possible State
+            self.updatePossible()
         # Till everyone knows everyone
-        
