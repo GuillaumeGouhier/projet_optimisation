@@ -8,7 +8,15 @@ class Solution(object):
 ## TODO: Check If Solution Is Viable
     def updatePossible(self):
         self.isPossible = False
+        #If possible, then everyone knows each other.
+        # == len knownSet U candidate
+        liste_candidate = [i for i in range(len(self.genes)) if self.genes[i]==1 ]
+        checkLen = ()
+        for i in self.genes:
+            checkLen.add(len(list(filter(lambda x: x.getId() in item.getListeConnu(), liste_candidate))))
 
+        #If everyone knows eachother, then set of known people should be equal in whole candidate liste
+        return len(checkLen) == 1
     def mutate(self, proba):
         self.genes = list(map(lambda x : 1-x if random.random() <= proba else x, self.genes ))
         return 0
