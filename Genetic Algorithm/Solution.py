@@ -19,6 +19,7 @@ class Solution(object):
         # Map invite to score
         scores = list(map(lambda x: (len([j for j in invites_candidate if j not in data[x].getListeConnu()]), x), invites_candidate).sort(reverse=True)
         # Remove if too problematic
-        while self.isPossible():
+        while !self.isPossible():
             self.genes[invites_candidate[scores[i][1]]] = 0
         # Till everyone knows everyone
+        
