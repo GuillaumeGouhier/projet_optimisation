@@ -1,17 +1,6 @@
-# This is a sample Python script.
-
-# Press Maj+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import sys
 from Convive import Convive
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     if len(sys.argv) > 2:
         source_file = open(sys.argv[1], "r")
@@ -108,6 +97,3 @@ def recursiveGlouton(liste_candidate, liste_finale):
     liste_candidate = tmp_liste
 
     recursiveGlouton(liste_candidate, liste_finale)
-
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
