@@ -23,6 +23,7 @@ class Convive:
         for i in range(len(self.connu)):
             poids = poids + " + " + self.connu[i]
         poids = poids + " <= " + str(len(self.connu))
+        self.weight = poids
         return poids
 
     def getLenConnu(self):

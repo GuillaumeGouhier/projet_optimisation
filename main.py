@@ -97,3 +97,12 @@ def recursiveGlouton(liste_candidate, liste_finale):
     liste_candidate = tmp_liste
 
     recursiveGlouton(liste_candidate, liste_finale)
+
+# Allows different criteria for glouton
+def relationshipCriteria(x, item):
+    return (x.getId() in item.getListeConnu())
+
+def potentialScoreCriteria(x, item):
+    #Get number of people known among those still possible
+    nbRelationships = len(list(filter(relationshipCriteria(x, item), liste_candidate))) ## TODO: Refactor to allow better behavior
+    return item.weight * nbRelationships
