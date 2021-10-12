@@ -25,7 +25,7 @@ if __name__ == '__main__':
         print(binaries_list)
 
         for i in range(len(convive_list)):
-            convive_list[i].setlisteNonConnu(binaries_list)
+            convive_list[i].setlisteConnu(binaries_list)
         print(binaries_list)
 
         z_max = z_max[:-2]
@@ -59,7 +59,7 @@ if __name__ == '__main__':
         source_file.close()
         destination_file.close()
     else:
-        print("Utilisation : python main.py source.txt destination.lb")
+        print("Utilisation : python main.py source.txt destination.lp")
 
 
 #liste_finale = liste d'ID

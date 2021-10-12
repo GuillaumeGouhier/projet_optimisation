@@ -28,3 +28,8 @@ class Convive:
 
     def getLenConnu(self):
         return int(len(self.connu))
+
+    def liste_candidate(self,liste):
+        self.connu = liste[:]
+        self.connu.remove(self.id)
+
