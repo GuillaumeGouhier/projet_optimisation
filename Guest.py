@@ -38,3 +38,5 @@ class Guest:
 
     def getKnownList(self):
         return self.known
+
+    ## LP construction
