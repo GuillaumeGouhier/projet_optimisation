@@ -10,7 +10,6 @@ if __name__ == '__main__':
     else:
         print("Utilisation : python main.py source.txt destination.lp")
 
-
 # final_list = liste d'ID
 # candidate_list = liste de Convives
 
