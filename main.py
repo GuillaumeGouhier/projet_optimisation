@@ -1,12 +1,12 @@
 import sys
 from Guest import Guest
-from LpConstructor import LpConstructor
+from LpConstructor import openFilesAndCreateLPFile
 
 if __name__ == '__main__':
     if len(sys.argv) > 2:
         binaries_list = []
         guest_list = []
-        openFilesAndCreateLPFile(argv[1],argv[2], binaries_list, guest_list)
+        openFilesAndCreateLPFile(sys.argv[1], sys.argv[2], binaries_list, guest_list)
     else:
         print("Utilisation : python main.py source.txt destination.lp")
 

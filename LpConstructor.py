@@ -37,6 +37,7 @@ def makeMaximisationEquation(source_file, destination_file, source_data, binarie
     createAllContraint(source_file, destination_file, source_data, binaries_list, guest_list)
 
 def createAllContraint(source_file, destination_file, source_data, binaries_list, guest_list):
+
     destination_file.write("Subject To" + '\n')
     for i in range(int(source_data[1])):  # Construction des liens entre les convives ne se connaissant pas
         lien_i_j = source_file.readline().strip().split()
@@ -54,7 +55,11 @@ def createAllContraint(source_file, destination_file, source_data, binaries_list
     for i in range(len(guest_list)):
         destination_file.write(guest_list[i].constructLineWeight() + '\n')
 
-def fun4():
+    writeVariableInFile(source_file, destination_file, source_data, binaries_list, guest_list)
+
+
+def writeVariableInFile(source_file, destination_file, source_data, binaries_list, guest_list):
+
     destination_file.write("binaries \n")
 
     for i in range(len(guest_list)):
