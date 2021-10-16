@@ -7,12 +7,12 @@ class Guest:
     def getId(self):
         return self.id
 
-    def setKnownList(self, list):  #Initialise la liste des convives que le convive ne connait pas
-        self.known = list[:]
-        self.known.remove(self.id)
+    def setUnknownList(self, list):  #Initialise la liste des convives que le convive ne connait pas
+        self.unknown = list[:]
+        self.unknown.remove(self.id)
 
-    def getKnownList(self):
-        return self.known
+    def getUnknownList(self):
+        return self.unknown
 
     def removeFromList(self, id):   #Retire les convives connus de cette liste
         self.known.remove(id)
@@ -26,10 +26,15 @@ class Guest:
         self.weight = lineWeight
         return lineWeight
 
-    def getLenKnown(self):
+    def getLenUnknown(self):
         return int(len(self.known))
 
     def liste_candidate(self, list):
         self.known = list[:]
         self.known.remove(self.id)
 
+    def addtoKnownList(self, item):
+        self.known.add(item)
+
+    def getKnownList(self):
+        return self.known
