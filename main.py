@@ -1,6 +1,8 @@
 import sys
 from Guest import Guest
 from LpConstructor import openFilesAndCreateLPFile
+from func import init_list
+import functions
 
 if __name__ == '__main__':
     if len(sys.argv) > 2:
@@ -8,10 +10,14 @@ if __name__ == '__main__':
         guest_list = []
 
         ## Generation LP file
-        openFilesAndCreateLPFile(sys.argv[1], sys.argv[2], binaries_list, guest_list)
+        #openFilesAndCreateLPFile(sys.argv[1], sys.argv[2], binaries_list, guest_list)
 
 
+        ## Re init data
+        print(sys.argv)
+        guest_list = init_list(sys.argv[1])
 
+        print(len(guest_list))
         # Generate first glouton solution
         NIL_Guests = []
         local_solution = recursiveGlouton(guest_list, init_invit)
@@ -78,6 +84,5 @@ def relationshipCriteria(x, item):
 
 def potentialScoreCriteria(x, item, candidate_list):
     # Get number of people known among those still possible
-    nbRelationships = len(
-        list(filter(relationshipCriteria(x, item), candidate_list)))  ## TODO: Refactor to allow better behavior
+    nbRelationships = len(list(filter(relationshipCriteria(x, item), candidate_list)))  ## TODO: Refactor to allow better behavior
     return item.weight * nbRelationships

@@ -15,7 +15,7 @@ class Guest:
         return self.unknown
 
     def removeFromList(self, id):   #Retire les convives connus de cette liste
-        self.known.remove(id)
+        self.unknown.remove(id)
 
 
     def constructLineWeight(self):

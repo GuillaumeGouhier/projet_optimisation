@@ -2,10 +2,14 @@ import random
 class Solution(object):
     """docstring for Solution."""
 
-    def __init__(self, genes):
+    def __init__(self, genes = []):
         super(Solution, self).__init__()
+        if len(genes) == 0:
+            genes = generateGenes()
         self.genes = genes
 
+    def generateGenes ():
+        return [random.randint(0, 1) for i in range(300)]
 ## TODO: Check If Solution Is Viable
     def updatePossible(self):
         self.isPossible = False
