@@ -12,11 +12,11 @@ def GRASP(candidate_list, final_list):
     # Permet de savoir si tous se connaissent
     checkLen = ()
 
-    #############################""
+    
     # liste des potentiels meilleur guest
     list_rd = []
 
-    ################################
+    
 
     for item in candidate_list:
 
@@ -27,16 +27,16 @@ def GRASP(candidate_list, final_list):
             tmp_liste = tmp
             max_so_far = len(tmp)
             next_candidate = item.getId()
-            #########################
+            
             # ajoue des 5 meilleurs personnes
-            list_rd.append(next_candidate)  # on met tout les personnes qui se son batue pour ètres la personne qui connais le plus de monde
+            list_rd.append(next_candidate)  # on met tout les personnes qui se sont batuent pour êtres la personne qui connais le plus de monde
 
-        if len(list_rd) > 5:  # si il en a plus de 5 alors on prend les 5 dernière pk c'est les meilleur
+        if len(list_rd) > 5:  # si il en a plus de 5 alors on prend les 5 dernières car c'est les meilleur
             list_rd = list_rd[-5:]
-        # si y en a moin qui se sont batuent pas de soucie
+        # si y en a moin qui se sont batuent on les prend tous
         next_candidate = choix_rd(list_rd)  # on prend une des 5 personnes au hazard
 
-        ##################""
+        
 
     # Renvoie la liste d'ID des Convives
     if (len(checkLen) == 1):
