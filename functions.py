@@ -1,9 +1,10 @@
 import random
-import Solution
+from Solution import Solution
 
-def initPop():
-    population = [Solution() for i in range(0,100)]
-
+def initPop(size, data):
+    population = [Solution() for i in range(0,size)]
+    for i in population:
+        i.repair(data)
     return population
 
 ## TODO: Support for multiple genetic ( random etc)
@@ -30,7 +31,9 @@ def addChilds(couples):
     return list(map(lambda x: breed(x[0], x[1]), couples))
 
 def select_survivors(population):
-    return list(filter(lambda x: x.isPossible(), population))
+    print(population)
+    print(list(map(lambda x: x.getisPossible(), population)))
+    return list(filter(lambda x: x.getisPossible(), population))
 
 
 def bestscore(population):
@@ -38,6 +41,7 @@ def bestscore(population):
 
 # TODO: going from genX to genX+1
 def nextGeneration(population):
+    print(len(population))
     survivors = select_survivors(population)
-    survivors.add(addChilds(parentCouples(population)))
+    survivors.extend(addChilds(parentCouples(population)))
     return survivors

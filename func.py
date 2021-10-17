@@ -39,17 +39,14 @@ def constructKnownList(data, fp):
     lines = fd.readlines()
     print(lines[0].strip().split()[0])
     for i in range(int(lines[0].strip().split()[0]), int(lines[0].strip().split()[1])):  # Construction des liens entre les convives
-        print("coucou")
         lien_i_j = lines[i].strip().split()
 
-        print("Lien :",lien_i_j)
         for j in range(len(data)):
             if lien_i_j[0] == data[j].getId():
                 data[j].addtoKnownList(lien_i_j[1])
             if lien_i_j[1] == data[j].getId():
                 data[j].addtoKnownList(lien_i_j[0])
-    # Add known people to every guest
-
+    fd.close()
     # Based on LP construction but extended
 
     return data

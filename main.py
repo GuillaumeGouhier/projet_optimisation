@@ -2,7 +2,7 @@ import sys
 from Guest import Guest
 from LpConstructor import openFilesAndCreateLPFile
 from func import init_list
-import functions
+from functions import initPop, nextGeneration
 from Solution import Solution
 
 
@@ -12,8 +12,6 @@ from Solution import Solution
 ##Critère basé sur le nombre de relations pour tenter de maximiser le score. Mais pas le score directement
 
 def recursiveGlouton(candidate_list, final_list):
-    print("\n Candidate list length: ", len(candidate_list))
-    print("\n Final list: ", final_list)
     # Compter nb personnes connues
     max_so_far = 0
     next_candidate = -1
@@ -35,7 +33,6 @@ def recursiveGlouton(candidate_list, final_list):
     # Renvoie la liste d'ID des Convives
     if (len(checkLen) == 1):
 
-
         final_list.extend(list(map(lambda x: x.getId(), candidate_list)))
         ## Translate list of ids to genes
         print("Liste finale: ", final_list)
@@ -46,7 +43,6 @@ def recursiveGlouton(candidate_list, final_list):
 
         ## Construct Solution object
         result = Solution(genes)
-        print(result.getGenes())
         return result
 
     final_list.append(next_candidate)
@@ -62,9 +58,9 @@ def relationshipCriteria(x, item):
 
 def potentialScoreCriteria(x, item, candidate_list):
     # Get number of people known among those still possible
-    nbRelationships = len(list(filter(relationshipCriteria(x, item), candidate_list)))  ## TODO: Refactor to allow better behavior
+    nbRelationships = len(
+        list(filter(relationshipCriteria(x, item), candidate_list)))  ## TODO: Refactor to allow better behavior
     return item.weight * nbRelationships
-
 
 
 ## Main
@@ -75,8 +71,7 @@ if __name__ == '__main__':
         guest_list = []
 
         ## Generation LP file
-        #openFilesAndCreateLPFile(sys.argv[1], sys.argv[2], binaries_list, guest_list)
-
+        # openFilesAndCreateLPFile(sys.argv[1], sys.argv[2], binaries_list, guest_list)
 
         ## Re init data
         guest_list = init_list(sys.argv[1])
@@ -84,8 +79,12 @@ if __name__ == '__main__':
         # Generate first glouton solution
         NIL_Guests = []
         local_solution = recursiveGlouton(guest_list, NIL_Guests)
-        print(local_solution.getGenes())
+
         # Perform Genetic Algorithm
+        population = initPop(100, guest_list)
+        while (True):
+            population = nextGeneration(population)
+            print(len(population))
 
         # Perform other metaheuristics
 

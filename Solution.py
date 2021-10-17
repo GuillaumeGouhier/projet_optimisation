@@ -4,15 +4,15 @@ class Solution(object):
 
     def __init__(self, genes = []):
         super(Solution, self).__init__()
-        if len(genes) == 0:
-            genes = generateGenes()
+        self.isPossible = False
         self.genes = genes
+        if len(genes) == 0:
+            self.generateGenes()
 
-    def generateGenes ():
-        return [random.randint(0, 1) for i in range(300)]
+    def generateGenes (self):
+        self.genes =  [random.randint(0, 1) for i in range(300)]
 ## TODO: Check If Solution Is Viable
     def updatePossible(self):
-        self.isPossible = False
         #If possible, then everyone knows each other.
         # == len knownSet U candidate
         liste_candidate = [i for i in range(len(self.genes)) if self.genes[i] == 1]
@@ -21,20 +21,29 @@ class Solution(object):
             checkLen.add(len(list(filter(lambda x: x.getId() in item.getKnownList(), liste_candidate))))
 
         #If everyone knows eachother, then set of known people should be equal in whole candidate liste
-        return len(checkLen) == 1
+        self.isPossible = len(checkLen) == 1
+
     def mutate(self, proba):
         self.genes = list(map(lambda x : 1 - x if random.random() <= proba else x, self.genes))
         return 0
 
     def repair (self, data):
         # Repair phase to ensure every child solution can live
-        invites_candidate = [i for i in range(len(self.genes)) if self.genes[i] == 1]
+        invites_candidate = set()
+        for i in range(len(self.genes)):
+            if self.genes[i] == 1:
+                invites_candidate.add(i)
+        print("Candidats: ", invites_candidate)
         # Map invite to score
-        scores = list(map(lambda x: (len([j for j in invites_candidate if j not in data[x].getKnownList()]), x), invites_candidate).sort(reverse=True))
+        ##Debug
+        print(len(data[list(invites_candidate)[0]].getKnownList().difference(invites_candidate)))
+
+
+        scores = list(map(lambda x: (len(data[x].getKnownList().intersection(invites_candidate)), x), invites_candidate)).sort()
+        print(scores)
         # Remove if too problematic
-        i = 0
         while self.isPossible == False:
-            self.genes[invites_candidate[scores[i][1]]] = 0
+            self.genes[scores[0]] = 0
             i=i+1
             #Update Possible State
             self.updatePossible()
@@ -42,3 +51,6 @@ class Solution(object):
 
     def getGenes(self):
         return self.genes
+
+    def getisPossible(self):
+        return self.isPossible
