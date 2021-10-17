@@ -16,7 +16,7 @@ class Solution(object):
         #If possible, then everyone knows each other.
         # == len knownSet U candidate
         liste_candidate = [i for i in range(len(self.genes)) if self.genes[i] == 1]
-        checkLen = ()
+        checkLen = set()
         for i in self.genes:
             checkLen.add(len(list(filter(lambda x: x.getId() in item.getKnownList(), liste_candidate))))
 
@@ -38,8 +38,9 @@ class Solution(object):
         ##Debug
         print(len(data[list(invites_candidate)[0]].getKnownList().difference(invites_candidate)))
 
-
-        scores = list(map(lambda x: (len(data[x].getKnownList().intersection(invites_candidate)), x), invites_candidate)).sort()
+        scores = list()
+        for i in invites_candidate:
+            scores.append(len(data[i].getKnownList().difference(invites_candidate)))
         print(scores)
         # Remove if too problematic
         while self.isPossible == False:

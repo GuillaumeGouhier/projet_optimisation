@@ -1,10 +1,10 @@
 
 
 class Guest:
-    def __init__(self,id):
+    def __init__(self,id, interest):
         self.id = id
         self.known = set()
-        self.interest = interet
+        self.interest = interest
 
     def getId(self):
         return self.id
