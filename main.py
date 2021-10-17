@@ -3,7 +3,7 @@ from Guest import Guest
 from LpConstructor import openFilesAndCreateLPFile
 from func import init_list
 import functions
-
+from Solution import Solution
 
 
 # final_list = liste d'ID
@@ -12,7 +12,7 @@ import functions
 ##Critère basé sur le nombre de relations pour tenter de maximiser le score. Mais pas le score directement
 
 def recursiveGlouton(candidate_list, final_list):
-    print("\n Candidate list: ", candidate_list)
+    print("\n Candidate list length: ", len(candidate_list))
     print("\n Final list: ", final_list)
     # Compter nb personnes connues
     max_so_far = 0
@@ -35,21 +35,24 @@ def recursiveGlouton(candidate_list, final_list):
     # Renvoie la liste d'ID des Convives
     if (len(checkLen) == 1):
 
+
+        final_list.extend(list(map(lambda x: x.getId(), candidate_list)))
         ## Translate list of ids to genes
+        print("Liste finale: ", final_list)
         genes = [0 for i in range(len(guest_list))]
         for i in final_list:
-            genes[i] = 1
+            genes[int(i)] = 1
         print("Genes Glouton: ", genes)
 
         ## Construct Solution object
         result = Solution(genes)
+        print(result.getGenes())
+        return result
 
-        return genes
-
-    final_list.add(next_candidate)
+    final_list.append(next_candidate)
     candidate_list = tmp_liste
 
-    recursiveGlouton(candidate_list, final_list)
+    return recursiveGlouton(candidate_list, final_list)
 
 
 # Allows different criteria for glouton
@@ -80,8 +83,8 @@ if __name__ == '__main__':
 
         # Generate first glouton solution
         NIL_Guests = []
-  #      local_solution = recursiveGlouton(guest_list, NIL_Guests)
-
+        local_solution = recursiveGlouton(guest_list, NIL_Guests)
+        print(local_solution.getGenes())
         # Perform Genetic Algorithm
 
         # Perform other metaheuristics

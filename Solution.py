@@ -39,3 +39,6 @@ class Solution(object):
             #Update Possible State
             self.updatePossible()
         # Till everyone knows everyone
+
+    def getGenes(self):
+        return self.genes
