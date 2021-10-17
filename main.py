@@ -66,18 +66,19 @@ def potentialScoreCriteria(x, item, candidate_list):
 ## Main
 
 if __name__ == '__main__':
-    if len(sys.argv) > 2:
+    if len(sys.argv) > 3:
         binaries_list = []
         guest_list = []
-
+        print(sys.argv[1]+" : Not implemented")
         ## Generation LP file
-        # openFilesAndCreateLPFile(sys.argv[1], sys.argv[2], binaries_list, guest_list)
+        openFilesAndCreateLPFile(sys.argv[2], sys.argv[3], binaries_list, guest_list)
 
         ## Re init data
-        guest_list = init_list(sys.argv[1])
+        guest_list = init_list(sys.argv[2])
 
         # Generate first glouton solution
         NIL_Guests = []
+        recursiveGlouton(guest_list, NIL_Guests)
         local_solution = recursiveGlouton(guest_list, NIL_Guests)
 
         # Perform Genetic Algorithm

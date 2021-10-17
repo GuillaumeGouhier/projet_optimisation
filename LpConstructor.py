@@ -1,4 +1,4 @@
-from Guest import Guest
+from Convive import Convive
 import sys
 
 
@@ -23,11 +23,11 @@ def makeMaximisationEquation(source_file, destination_file, source_data, binarie
         z_max = z_max + coeff_i[1] + " x" + coeff_i[0] + " + "
 
         binaries_list.append("x" + coeff_i[0])
-        guest_list.append(Guest("x" + coeff_i[0]))
+        guest_list.append(Convive("x" + coeff_i[0]))
     print(binaries_list)
 
     for i in range(len(guest_list)):
-        guest_list[i].setKnownList(binaries_list)
+        guest_list[i].setUnknownList(binaries_list)
     print(binaries_list)
 
     z_max = z_max[:-2]
