@@ -3,6 +3,7 @@
 class Guest:
     def __init__(self,id):
         self.id = id
+        self.known = list()
 
     def getId(self):
         return self.id
@@ -30,8 +31,9 @@ class Guest:
         return int(len(self.known))
 
     def addtoKnownList(self, item):
-        self.known.add(item)
 
+        print("Id:", self.getId(), "connait: ", item)
+        self.known.append(item)
     def getKnownList(self):
         return self.known
 

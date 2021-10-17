@@ -10,6 +10,8 @@ def init_list(fp):
     # Read data source
     data = []
     data = parsefile(fp)
+
+
     return data
 
 
@@ -17,7 +19,6 @@ def parsefile(fp):
     result = []
 
     fd = open(fp, 'r')
-    print(fd.readable())
     file_data = fd.readline().split()
 
     for i in range(int(file_data[0])):
@@ -25,21 +26,28 @@ def parsefile(fp):
         result.append(Guest(coeff_i[0]))
 
         # Construct Known List
-    return result
+    fd.close()
+
+    tmp = constructKnownList(result, fp)
+
+    return tmp
 
 
-def constructKnownList(data, fd):
-    for i in range(int(source_data[0]),
-                   int(source_data[1])):  # Construction des liens entre les convives ne se connaissant pas
-        lien_i_j = fd.readline().strip().split()
+def constructKnownList(data, fp):
 
-        lien_i_j[0] = lien_i_j[0]
-        lien_i_j[1] = lien_i_j[1]
-        for j in range(len(guest_list)):
-            if lien_i_j[0] == guest_list[j].getId():
-                guest_list[j].addtoKnownList(lien_i_j[1])
-            if lien_i_j[1] == guest_list[j].getId():
-                guest_list[j].addtoKnownList(lien_i_j[0])
+    fd = open(fp, 'r')
+    lines = fd.readlines()
+    print(lines[0].strip().split()[0])
+    for i in range(int(lines[0].strip().split()[0]), int(lines[0].strip().split()[1])):  # Construction des liens entre les convives
+        print("coucou")
+        lien_i_j = lines[i].strip().split()
+
+        print("Lien :",lien_i_j)
+        for j in range(len(data)):
+            if lien_i_j[0] == data[j].getId():
+                data[j].addtoKnownList(lien_i_j[1])
+            if lien_i_j[1] == data[j].getId():
+                data[j].addtoKnownList(lien_i_j[0])
     # Add known people to every guest
 
     # Based on LP construction but extended

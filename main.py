@@ -4,32 +4,7 @@ from LpConstructor import openFilesAndCreateLPFile
 from func import init_list
 import functions
 
-if __name__ == '__main__':
-    if len(sys.argv) > 2:
-        binaries_list = []
-        guest_list = []
 
-        ## Generation LP file
-        #openFilesAndCreateLPFile(sys.argv[1], sys.argv[2], binaries_list, guest_list)
-
-
-        ## Re init data
-        print(sys.argv)
-        guest_list = init_list(sys.argv[1])
-
-        print(len(guest_list))
-        # Generate first glouton solution
-        NIL_Guests = []
-        local_solution = recursiveGlouton(guest_list, init_invit)
-
-        # Perform Genetic Algorithm
-
-        # Perform other metaheuristics
-
-
-
-    else:
-        print("Utilisation : python main.py source.txt destination.lp")
 
 # final_list = liste d'ID
 # candidate_list = liste de Convives
@@ -45,7 +20,7 @@ def recursiveGlouton(candidate_list, final_list):
     # Future liste candidate
     tmp_liste = []
     # Permet de savoir si tous se connaissent
-    checkLen = ()
+    checkLen = set()
 
     for item in candidate_list:
 
@@ -61,7 +36,7 @@ def recursiveGlouton(candidate_list, final_list):
     if (len(checkLen) == 1):
 
         ## Translate list of ids to genes
-        genes = [0 for i in range(guest_list)]
+        genes = [0 for i in range(len(guest_list))]
         for i in final_list:
             genes[i] = 1
         print("Genes Glouton: ", genes)
@@ -86,3 +61,32 @@ def potentialScoreCriteria(x, item, candidate_list):
     # Get number of people known among those still possible
     nbRelationships = len(list(filter(relationshipCriteria(x, item), candidate_list)))  ## TODO: Refactor to allow better behavior
     return item.weight * nbRelationships
+
+
+
+## Main
+
+if __name__ == '__main__':
+    if len(sys.argv) > 2:
+        binaries_list = []
+        guest_list = []
+
+        ## Generation LP file
+        #openFilesAndCreateLPFile(sys.argv[1], sys.argv[2], binaries_list, guest_list)
+
+
+        ## Re init data
+        guest_list = init_list(sys.argv[1])
+
+        # Generate first glouton solution
+        NIL_Guests = []
+  #      local_solution = recursiveGlouton(guest_list, NIL_Guests)
+
+        # Perform Genetic Algorithm
+
+        # Perform other metaheuristics
+
+
+
+    else:
+        print("Utilisation : python main.py source.txt destination.lp")
