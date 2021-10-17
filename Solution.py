@@ -55,3 +55,20 @@ class Solution(object):
 
     def getisPossible(self):
         return self.isPossible
+
+    def K_Flip(self, k):  # Create a new solution with 3 flipped gene
+        tab_rand = []
+        new_gene = self.genoa.copy()
+        dejaUtilise = 0
+        for i in range(k):
+            randnumber = randint(0, len(self.genoa))
+            for j in range(tab_rand):
+                if randnumber == tab_rand[j]:
+                    dejaUtilise = 1
+            if dejaUtilise == 0:
+                tab_rand.append(randnumber)
+                new_gene[randnumber] = 1 - new_gene[randnumber]
+            else:
+                i = i - 1
+
+        return (Solution(new_gene))
