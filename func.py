@@ -23,7 +23,7 @@ def parsefile(fp):
 
     for i in range(int(file_data[0])):
         coeff_i = fd.readline().strip().split()
-        result.append(Guest(coeff_i[0]))
+        result.append(Guest(coeff_i[0],int(coeff_i[1])))
 
         # Construct Known List
     fd.close()
