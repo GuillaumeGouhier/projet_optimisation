@@ -1,6 +1,6 @@
 def init_data(source):
     # Initialize guest_list with data in it
-    guest_list = init_list()
+    guest_list = init_list(source)
 
 
 def init_list(fp):
@@ -8,8 +8,6 @@ def init_list(fp):
     data = []
     data = parsefile(fp)
     return data
-
-
 
 def parsefile(fp):
 

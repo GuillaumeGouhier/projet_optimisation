@@ -29,14 +29,12 @@ class Guest:
     def getLenUnknown(self):
         return int(len(self.known))
 
-    def liste_candidate(self, list):
-        self.known = list[:]
-        self.known.remove(self.id)
-
     def addtoKnownList(self, item):
         self.known.add(item)
 
     def getKnownList(self):
         return self.known
 
+    def setKnownList(self, list):
+        self.known = list
     ## LP construction

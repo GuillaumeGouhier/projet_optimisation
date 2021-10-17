@@ -7,6 +7,19 @@ if __name__ == '__main__':
         binaries_list = []
         guest_list = []
         openFilesAndCreateLPFile(sys.argv[1], sys.argv[2], binaries_list, guest_list)
+
+
+
+        # Generate first glouton solution
+        init_invit = []
+        local_solution = recursiveGlouton(guest_list, init_invit)
+
+        # Perform Genetic Algorithm
+
+        # Perform other metaheuristics
+
+
+
     else:
         print("Utilisation : python main.py source.txt destination.lp")
 
@@ -38,6 +51,11 @@ def recursiveGlouton(candidate_list, final_list):
 
     # Renvoie la liste d'ID des Convives
     if (len(checkLen) == 1):
+
+        ## Construct Solution object
+        result = Solution()
+        result.sert
+
         return final_list
 
     final_list.add(next_candidate)
